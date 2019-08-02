@@ -1,0 +1,16 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>IfcObjAsm</groupId>
+  <artifactId>IfcObjAsm</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>IfcObjAsm</name>
+  <description>A proof-of-concept for treating Industry Foundation Class data as relocatable modules in a file system.
+</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>net.sf.saxon</groupId>
+  		<artifactId>Saxon-HE</artifactId>
+  		<version>9.9.1-4</version>
+  	</dependency>
+  </dependencies>
+</project>
