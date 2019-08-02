@@ -28,6 +28,9 @@
 		<xsl:result-document href="{concat('objects', '/', 'ids', '/', @id)}" method="xml">
 			<xsl:copy>
 					<xsl:copy-of select="@*[name()!='id']"/>
+					<xsl:if test="ifc:GlobalId">
+						<xsl:attribute name="id"><xsl:value-of select="ifc:GlobalId"/></xsl:attribute>
+					</xsl:if>
 					<xsl:attribute name="_id"><xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:apply-templates select="@*|node()"/>
 			</xsl:copy>
@@ -55,17 +58,12 @@
 	<!-- *** SPECIAL CONDITIONS *** -->
 	<xsl:template match="ifc:IfcProject[@id]" priority="1">
 	
-		<!-- place a handle to the ProjectLibrary in the root directory -->
-		<xsl:result-document href="{ifc:GlobalId}" method="xml">
-			<xi:include href="{concat('objects', '/', ifc:GlobalId)}"/>
-		</xsl:result-document>
-		
-		<!-- process the Project as a ProjectLibrary --> 
+		<!-- process the Project as a ProjectLibrary to comply w/ IfcSingleProjectInstance --> 
 		<xsl:result-document href="{concat('objects', '/', 'ids', '/', @id)}" method="xml">
 			<ifc:IfcProjectLibrary><xsl:apply-templates select="@*|node()"/></ifc:IfcProjectLibrary>
 		</xsl:result-document>
 	</xsl:template>
-
+	
 
 	<xsl:template match="ifc:GlobalId">
 		<xsl:variable name="uid">
