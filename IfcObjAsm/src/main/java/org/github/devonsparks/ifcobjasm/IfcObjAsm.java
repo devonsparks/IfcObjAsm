@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javax.swing.filechooser.FileFilter;
 import javax.xml.transform.stream.StreamSource;
 
 import net.sf.saxon.lib.FeatureKeys;
@@ -69,11 +68,8 @@ public class IfcObjAsm {
 		 
 		  int c = 0;
 		  int size = objects.length;
-		  if (objects == null) {
-			  throw new FileNotFoundException("No 'objects' subdirectory found");
-		  }
 		  
-		    for (File child : objects) {
+		  for (File child : objects) {
 		    	System.out.println(c+"/"+size +"("+child.getName()+")");
 		    	c++;
 		    	try {
@@ -84,15 +80,14 @@ public class IfcObjAsm {
 		    	}
 		    	
 		    }
-		    System.out.println(idsDir.getAbsolutePath());
+
+		    /* remove the 'ids' temporaries */
 		    for(File child : idsDir.listFiles()){
 		    	System.out.println(child.getName());
 		    	child.delete();
 		    }
-		    
 		    idsDir.delete();
-		    
-		    
+
 		    
 		    
 	}
