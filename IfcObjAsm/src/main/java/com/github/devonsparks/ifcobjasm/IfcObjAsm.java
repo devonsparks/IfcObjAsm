@@ -20,7 +20,7 @@ public class IfcObjAsm {
 
 		try {
 			disassemble1(new File(args[0]));
-			disassemble2();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -28,64 +28,45 @@ public class IfcObjAsm {
 	}
 
 	public static void disassemble1(File input) throws SaxonApiException {
-		Processor processor = new Processor(false);
-		XsltCompiler compiler = processor.newXsltCompiler();
 
-		InputStream xsl = loader.getResourceAsStream("disassemble.xsl");
 
-		XsltExecutable exp = compiler.compile(new StreamSource(xsl));
-		Serializer out = processor.newSerializer(System.out);
+		InputStream disassemble = loader.getResourceAsStream("disassemble.xsl");
+		InputStream scatter = loader.getResourceAsStream("scatter.xsl");
+		InputStream report = loader.getResourceAsStream("report.xsl");
+		
+		Processor proc = new Processor(false);
+        XsltCompiler comp = proc.newXsltCompiler();
+        
+        /* disassemble step */
+        XsltExecutable templates1 = comp.compile(new StreamSource(disassemble));
+        XdmNode source = proc.newDocumentBuilder().build(new StreamSource(input));
+        XsltTransformer trans1 = templates1.load();
+        trans1.setInitialContextNode(source);
 
-		out.setOutputProperty(Serializer.Property.METHOD, "xml");
-		out.setOutputProperty(Serializer.Property.INDENT, "yes");
-		Xslt30Transformer trans = exp.load30();
-		trans.setBaseOutputURI(baseUri);
-		trans.transform(new StreamSource(input), out);
-		System.out.println("Done with step 1");
+        /* scatter step */
+        XsltExecutable templates2 = comp.compile(new StreamSource(scatter));
+        XsltTransformer trans2 = templates2.load();
+        trans2.setBaseOutputURI(baseUri);
+        
+        /* report step */
+        XsltExecutable templates3 = comp.compile(new StreamSource(report));
+        XsltTransformer trans3 = templates3.load();
 
-	}
-
-	public static void disassemble2() throws SaxonApiException, FileNotFoundException {
-
-		InputStream xsl = loader.getResourceAsStream("identity.xsl");
-		Processor processor = new Processor(false);
-		processor.setConfigurationProperty(FeatureKeys.XINCLUDE, true);
-
-		XsltCompiler compiler = processor.newXsltCompiler();
-		XsltExecutable exp = compiler.compile(new StreamSource(xsl));
-
-		Xslt30Transformer trans = exp.load30();
-		trans.setBaseOutputURI(baseUri);
-
-		Path baseDir = Paths.get(System.getProperty("user.dir")).getParent();
-
-		File objectsDir = new File(Paths.get(baseDir.toString(), "objects").toString());
-		File idsDir = new File(Paths.get(baseDir.toString(), "objects", "ids").toString());
-
-		File[] objects = objectsDir.listFiles(File::isFile);
-
-		int c = 0;
-		int size = objects.length;
-
-		for (File child : objects) {
-			System.out.println(c + "/" + size + "(" + child.getName() + ")");
-			c++;
-			try {
-				Serializer out = processor.newSerializer(child);
-				trans.transform(new StreamSource(child), out);
-			} catch (SaxonApiException e) {
-				System.err.println("Couldn't process " + child.getName());
-			}
-
-		}
-
-		/* remove the 'ids' temporaries */
-		for (File child : idsDir.listFiles()) {
-			System.out.println(child.getName());
-			child.delete();
-		}
-		idsDir.delete();
+        XdmDestination resultTree = new XdmDestination();
+        trans3.setDestination(resultTree);
+        
+        /* step linking */
+        trans1.setDestination(trans2);
+        trans2.setDestination(trans3);	
+        trans3.setParameter(new QName("objectsdir"), new XdmAtomicValue("objects"));
+        
+        /* kickstart */
+        trans1.transform();
+		
+        System.out.println(resultTree.getXdmNode());
 
 	}
+
+	
 
 }
