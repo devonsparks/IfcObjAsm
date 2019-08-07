@@ -25,8 +25,20 @@ public abstract class XsltCommand {
 		return this.baseUri;
 	}
 	
+	/**
+	 * All commands receive the full argument for further processing
+	 * 
+	 * @param args  the full arglist. args[0] is the command name.
+	 * @return
+	 */
 	public abstract CommandResponse execute(String[] args);
 	
+	/**
+	 * Register a command name with its implementation
+     *
+	 * @param commands  map command names to implementations
+	 * @return          the updated command map
+	 */
 	public HashMap<String, XsltCommand> register(HashMap<String, XsltCommand> commands) {
 		commands.put(this.getName(), this);
 		return commands;

@@ -15,15 +15,21 @@ import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
 
+
 public class ObjectifyCommand extends XsltCommand {
 
 	ObjectifyCommand() {
 		this.setName("objectify");
 	}
 	
+	/**
+	 * Given an ifcxml file (args[1]), rewrite refs to Resource Layer IFC
+	 * Entities as inline literals, write each IfcRoot instance to its own file,
+	 * and return a list of xi:includes to all parsed IfcRoot instance objects.
+	 * See rewrite.xsl, scatter.xsl, report.xsl in resources folder for details.
+	 */
 	@Override
 	public CommandResponse execute(String[] args)  {
-		
 		assert(args[0] == this.getName());
 		
 		if(args.length < 2) {
@@ -32,7 +38,7 @@ public class ObjectifyCommand extends XsltCommand {
 						"Missing source xml document in argument list");
 		}
 		
-		File input = new File(args[2]);
+		File input = new File(args[1]);
 		if(!input.exists()) {
 			return new CommandResponse(this,
 						CommandResponse.states.FAIL,
@@ -40,7 +46,7 @@ public class ObjectifyCommand extends XsltCommand {
 		}
 		
 		
-		InputStream disassemble = loader.getResourceAsStream("disassemble.xsl");
+		InputStream rewrite = loader.getResourceAsStream("rewrite.xsl");
 		InputStream scatter = loader.getResourceAsStream("scatter.xsl");
 		InputStream report = loader.getResourceAsStream("report.xsl");
 		
@@ -50,8 +56,8 @@ public class ObjectifyCommand extends XsltCommand {
         XdmDestination resultTree = new XdmDestination();
         
         try {
-        	/* disassemble step */
-	        XsltExecutable templates1 = comp.compile(new StreamSource(disassemble));
+        	/* rewrite step */
+	        XsltExecutable templates1 = comp.compile(new StreamSource(rewrite));
 	        XdmNode source = proc.newDocumentBuilder().build(new StreamSource(input));
 	        trans1 = templates1.load();
 	        trans1.setInitialContextNode(source);
@@ -85,11 +91,12 @@ public class ObjectifyCommand extends XsltCommand {
         			"Failed to load internal report step. This is likely a bug.");
         }
         
-        
         try {
 	        /* step linking */
 	        trans1.setDestination(trans2);
 	        trans2.setDestination(trans3);	
+	        
+	        // TODO make outputdir settable
 	        trans3.setParameter(new QName("objectsdir"), new XdmAtomicValue("objects"));
 	        trans3.setDestination(resultTree);
 	        
