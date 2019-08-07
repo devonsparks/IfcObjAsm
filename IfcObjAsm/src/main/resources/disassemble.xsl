@@ -1,16 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" 
- xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
- xmlns:ifc="http://www.iai-tech.org/ifcXML/IFC2x2/FINAL"
- xmlns:saxon="http://saxon.sf.net/">
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+	<!-- TODO - alternative to IFC namespace wildcard on GlobalId ? -->
 	
 	<!-- *** GLOBALS *** -->
 	<xsl:strip-space elements=""/>
 
 	<xsl:key name="tags" match="*[@id]" use="@id"/>
-	<xsl:key name="objects" match="*[ifc:GlobalId]" use="@id"/>
+	<xsl:key name="objects" match="*[*:GlobalId]" use="@id"/>
 
-	<!-- *** IDENTITY *** -->
+
 	<xsl:template match="@*|node()">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
@@ -20,9 +20,9 @@
 	
 	<xsl:template match="@id">
 		
-		<xsl:if test="../ifc:GlobalId">
+		<xsl:if test="../*:GlobalId">
 		<xsl:attribute name="id">
-			<xsl:value-of select="../ifc:GlobalId"/>
+			<xsl:value-of select="../*:GlobalId"/>
 		</xsl:attribute>
 		</xsl:if>
 	</xsl:template>
@@ -39,7 +39,7 @@
 				<xsl:copy>
 					<xsl:copy-of select="@*[name()!='id' and name()!='ref']"/>
 					<xsl:attribute name="ref">
-						<xsl:value-of select="$obj/ifc:GlobalId"/>
+						<xsl:value-of select="$obj/*:GlobalId"/>
 					</xsl:attribute>
 				</xsl:copy>
 			</xsl:when>

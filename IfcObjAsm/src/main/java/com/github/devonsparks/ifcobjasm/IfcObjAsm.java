@@ -14,17 +14,35 @@ import net.sf.saxon.s9api.*;
 public class IfcObjAsm {
 
 	private static final String baseUri = "file://" + System.getProperty("user.dir");
-
 	private static final ClassLoader loader = IfcObjAsm.class.getClassLoader();
+	
 	public static void main(String[] args) {
 
+		if(args.length < 1) {
+			usage("Missing arguments");
+		}
+		
+		File input = new File(args[0]);
+		if(!input.exists()) {
+			usage("Input file not found");
+		}
+		
 		try {
 			disassemble1(new File(args[0]));
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		System.exit(0);
 
+	}
+	
+	public static void usage(String msg) {
+		System.err.println(msg);
+		System.err.println("***");
+		System.err.println("[scatter [file]]");
+		System.exit(-1);
 	}
 
 	public static void disassemble1(File input) throws SaxonApiException {
@@ -53,12 +71,13 @@ public class IfcObjAsm {
         XsltTransformer trans3 = templates3.load();
 
         XdmDestination resultTree = new XdmDestination();
-        trans3.setDestination(resultTree);
+        
         
         /* step linking */
         trans1.setDestination(trans2);
         trans2.setDestination(trans3);	
         trans3.setParameter(new QName("objectsdir"), new XdmAtomicValue("objects"));
+        trans3.setDestination(resultTree);
         
         /* kickstart */
         trans1.transform();
