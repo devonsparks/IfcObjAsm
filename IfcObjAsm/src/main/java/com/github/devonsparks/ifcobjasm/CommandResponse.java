@@ -13,7 +13,7 @@ public class CommandResponse {
 	 */
 	CommandResponse(XsltCommand command, CommandResponse.states state, String resp) {
 		this.resp = String.format("%s: %s", command.getName(), resp);		
-		
+		this.state = state;
 	}
 	
 	public String getResponse() {

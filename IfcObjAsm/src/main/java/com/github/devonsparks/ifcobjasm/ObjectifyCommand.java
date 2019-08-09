@@ -2,6 +2,10 @@ package com.github.devonsparks.ifcobjasm;
 
 import java.io.File;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.xml.transform.stream.StreamSource;
 
@@ -19,6 +23,7 @@ import net.sf.saxon.s9api.XsltTransformer;
 public class ObjectifyCommand extends XsltCommand {
 
 	ObjectifyCommand() {
+		super();
 		this.setName("objectify");
 	}
 	
@@ -31,24 +36,17 @@ public class ObjectifyCommand extends XsltCommand {
 	@Override
 	public CommandResponse execute(String[] args)  {
 		assert(args[0] == this.getName());
+		System.out.println("Before set, basedir is "+this.getBaseUri());
 		
-		if(args.length < 2) {
-			return new CommandResponse(this, 
-						CommandResponse.states.FAIL, 
-						"Missing source xml document in argument list");
-		}
+		CommandResponse argcheck = this.parseargs(args);
+	
 		
-		File input = new File(args[1]);
-		if(!input.exists()) {
-			return new CommandResponse(this,
-						CommandResponse.states.FAIL,
-						String.format("Source xml %s document not found", args[2]));
-		}
-		
-		
-		InputStream rewrite = loader.getResourceAsStream("rewrite.xsl");
-		InputStream scatter = loader.getResourceAsStream("scatter.xsl");
-		InputStream report = loader.getResourceAsStream("report.xsl");
+		if(argcheck.getState() != CommandResponse.states.OK)
+			return argcheck;
+		System.out.println("After set, basedir is "+this.getBaseUri());
+		InputStream rewrite = loader.getResourceAsStream("ObjectifyCommand/rewrite.xsl");
+		InputStream scatter = loader.getResourceAsStream("ObjectifyCommand/scatter.xsl");
+		InputStream report =  loader.getResourceAsStream("ObjectifyCommand/report.xsl");
 		
 		Processor proc = new Processor(false);
         XsltCompiler comp = proc.newXsltCompiler();
@@ -57,6 +55,7 @@ public class ObjectifyCommand extends XsltCommand {
         
         try {
         	/* rewrite step */
+        	File input = new File(args[1]);
 	        XsltExecutable templates1 = comp.compile(new StreamSource(rewrite));
 	        XdmNode source = proc.newDocumentBuilder().build(new StreamSource(input));
 	        trans1 = templates1.load();
@@ -67,23 +66,25 @@ public class ObjectifyCommand extends XsltCommand {
         			CommandResponse.states.FAIL,
         			"Failed to load internal disassemble step. This is likely a bug.");
         }
-        
+
         try {
-	        /* scatter step */
+	        // scatter step
 	        XsltExecutable templates2 = comp.compile(new StreamSource(scatter));
 	        trans2 = templates2.load();
-	        trans2.setBaseOutputURI(baseUri);
+	        trans2.setBaseOutputURI(this.getBaseUri().toString());
 	        
         } catch(SaxonApiException e) {
         	return new CommandResponse(this,
         			CommandResponse.states.FAIL,
         			"Failed to load internal scatter step. This is likely a bug.");
         }
+     
         
         try {
-	        /* report step */
+	        // report step
 	        XsltExecutable templates3 = comp.compile(new StreamSource(report));
 	        trans3 = templates3.load();
+	        trans3.setBaseOutputURI(this.getBaseUri().toString());
 	        
         } catch(SaxonApiException e) {
         	return new CommandResponse(this,
@@ -92,15 +93,16 @@ public class ObjectifyCommand extends XsltCommand {
         }
         
         try {
-	        /* step linking */
+	        
 	        trans1.setDestination(trans2);
 	        trans2.setDestination(trans3);	
-	        
-	        // TODO make outputdir settable
-	        trans3.setParameter(new QName("objectsdir"), new XdmAtomicValue("objects"));
+
+		    URI  objectsdir = this.getBaseUri().resolve("objects");
+	        trans3.setParameter(new QName("objectsdir"), 
+	        		new XdmAtomicValue(objectsdir.toString()));
 	        trans3.setDestination(resultTree);
 	        
-	        /* kickstart */
+	        // kickstart
 	        trans1.transform();
 	        
         } catch(SaxonApiException e) {
@@ -112,7 +114,6 @@ public class ObjectifyCommand extends XsltCommand {
         return new CommandResponse(this,
         		CommandResponse.states.OK, 
         		resultTree.getXdmNode().toString());
-
 	}
 
 

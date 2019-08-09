@@ -10,6 +10,7 @@ public class IfcObjAsm {
 	public static void main(String[] args) {
 		
 		new ObjectifyCommand().register(commands);
+		new SubgraphCommand().register(commands);
 		
 		if(args.length < 1) {
 			err(String.format("Command required. Options: %s", 
