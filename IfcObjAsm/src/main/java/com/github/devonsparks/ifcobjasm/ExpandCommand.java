@@ -9,51 +9,51 @@ import net.sf.saxon.s9api.XdmAtomicValue;
 import net.sf.saxon.s9api.XdmDestination;
 import net.sf.saxon.s9api.XsltTransformer;
 
-public class SubgraphCommand extends XsltCommand {
+public class ExpandCommand extends XsltCommand {
 
-	SubgraphCommand() {
-		super("subgraph");
+	ExpandCommand() {
+		super("expand");
 	}
-
+	
 	@Override
 	public CommandResponse execute(String[] args) {
 		assert (args[0] == this.getName());
 
 		CommandResponse argcheck = this.parseargs(args);
+
 		if (argcheck.getState() != CommandResponse.states.OK)
 			return argcheck;
 
-		XsltTransformer gather;
 		XsltBuilder builder = new XsltBuilder(this.getBaseUri());
+		builder.useXInclude(Boolean.TRUE);
+		XsltTransformer expand;
 		XdmDestination resultTree = new XdmDestination();
-
+		
 		try {
-			gather = builder.build(this.getXSL("SubgraphCommand/gather.xsl"), new File(args[1]));
+			expand = builder.build(this.getXSL("ExpandCommand/identity.xsl"), new File(args[1]));
 
 		} catch (SaxonApiException e) {
 			return new CommandResponse(this, CommandResponse.states.FAIL,
-					"Failed to load internal gather step. This is likely a bug.");
+					"Unable to load in-package XSLT steps. This is likely a bug.");
 		}
 
 		try {
-			URI objectsdir = this.getBaseUri().resolve("objects");
-			gather.setParameter(new QName("objectsdir"), new XdmAtomicValue(objectsdir.toString()));
-			gather.setDestination(resultTree);
-
-			// kickstart
-			gather.transform();
+			expand.setDestination(resultTree);
+			expand.transform();
 
 		} catch (SaxonApiException e) {
 			return new CommandResponse(this, CommandResponse.states.FAIL, "Failed to execute transformation.");
 		}
 
 		return new CommandResponse(this, CommandResponse.states.OK, resultTree.getXdmNode().toString());
+
 	}
 
 	@Override
 	public String help() {
-		return "Given an input ifcxml file with @ref attributes, produce an ifcxml"
-				+ " document that references all other IFCRoot objects connected to it.";
+		return "Given an ifcxml file, perform an XSLT identity transform"
+				+" with XInclude processing. Useful for reconstituting 'objectify'-ied"
+				+ " object archives.";
 	}
 
 }

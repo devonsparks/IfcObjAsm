@@ -61,4 +61,11 @@ public class ObjectifyCommand extends XsltCommand {
 		return new CommandResponse(this, CommandResponse.states.OK, resultTree.getXdmNode().toString());
 	}
 
+	@Override
+	public String help() {
+		return "Given an ifcxml file, output all of its IfcRoot-descended entities"
+				+ " into an 'objects' archive. Use the '-b' to set the base directory"
+				+ " for the archive location";
+	}
+
 }

@@ -1,2 +1,0 @@
-* saxon:canonical not supported in Saxon-HE, so removed from xsl files for now.
-* the exp: headers have neither id attributes or GlobalIds, so it's unclear where to put them or if they're relevant to this workflow.

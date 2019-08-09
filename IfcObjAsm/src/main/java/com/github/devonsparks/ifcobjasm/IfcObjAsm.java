@@ -11,6 +11,7 @@ public class IfcObjAsm {
 		
 		new ObjectifyCommand().register(commands);
 		new SubgraphCommand().register(commands);
+		new ExpandCommand().register(commands);
 		
 		if(args.length < 1) {
 			err(String.format("Command required. Options: %s", 

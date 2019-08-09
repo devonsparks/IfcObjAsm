@@ -6,6 +6,7 @@ import java.net.URI;
 
 import javax.xml.transform.stream.StreamSource;
 
+import net.sf.saxon.lib.FeatureKeys;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.XdmNode;
@@ -26,6 +27,7 @@ public class XsltBuilder {
 		baseUri = baseOutputUri;
 		proc = new Processor(false);
 		comp = proc.newXsltCompiler();
+		
 
 	}
 
@@ -42,6 +44,10 @@ public class XsltBuilder {
 		XsltTransformer trans = template.load();
 		trans.setBaseOutputURI(baseUri.toString());
 		return trans;
+	}
+	
+	public void useXInclude(Boolean yn) {
+		proc.setConfigurationProperty(FeatureKeys.XINCLUDE, yn);
 	}
 
 }
