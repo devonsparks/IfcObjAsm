@@ -65,6 +65,7 @@ public abstract class XsltCommand {
 	}
 	
 	protected CommandResponse parseargs(String args[]) {
+		
 		if(args.length < 2) {
 			return new CommandResponse(this, 
 						CommandResponse.states.FAIL, 
@@ -76,13 +77,15 @@ public abstract class XsltCommand {
 						CommandResponse.states.FAIL,
 						String.format("Source xml %s document not found", args[1]));
 		}
-
+		
+		
+		
 		if(args.length > 3 && args[2].equals("-b")) {
 			File base = new File(args[3]);
 			if(!base.exists())
 				return new CommandResponse(this,
 						CommandResponse.states.FAIL,
-						String.format("Base directory not found", args[3]));
+						String.format("Base directory not found. Create it and try again.", args[3]));
 			this.setBaseUri(base.toURI());
 			
 		

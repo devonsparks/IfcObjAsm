@@ -23,8 +23,8 @@ public class SubgraphCommand extends XsltCommand {
 		if (argcheck.getState() != CommandResponse.states.OK)
 			return argcheck;
 
-		XsltBuilder builder = new XsltBuilder(this.getBaseUri());
 		XsltTransformer gather;
+		XsltBuilder builder = new XsltBuilder(this.getBaseUri());
 		XdmDestination resultTree = new XdmDestination();
 
 		try {
