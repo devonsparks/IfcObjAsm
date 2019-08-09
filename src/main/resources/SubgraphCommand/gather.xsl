@@ -3,12 +3,30 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     xmlns:xi="http://www.w3.org/2001/XInclude"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:exp="urn:oid:1.0.10303.28.2.1.1" xmlns:doc="urn:oid:1.0.10303.28.2.1.3">
 
     <xsl:param name="objectsdir" select="'.'"/>
+
     
     <xsl:template match="/">
-      <xsl:call-template name="gather"/>
+	   	<xsl:variable name="result">
+	    	<xsl:call-template name="gather"/>
+	    </xsl:variable>
+	    
+		<xsl:copy select="doc:iso_10303_28">
+			<xsl:copy select="doc:express">
+				<xsl:copy-of select="@*"/>
+			</xsl:copy>
+			<xsl:copy select="doc:schema_population">
+				<xsl:copy-of select="@*"/>
+			</xsl:copy>
+			
+			<xsl:copy select="*:uos">
+				<xsl:copy-of select="@*"/>
+				<xsl:copy-of select="$result"/>
+			</xsl:copy>
+		</xsl:copy>
     </xsl:template>
 
     <!-- 

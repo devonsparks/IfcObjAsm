@@ -45,7 +45,7 @@ If you need to build IfcObjAsm yourself: `mvn clean package`.
 ### _objectify_
 _objectify_ takes an IFCXML and transforms it into an object repository. The resulting repository contains one file
 for each IFCRoot-descended entity in the input file, named by its ifc:GlobalId. _objectify_  will emit on stdout an
-IFCXML file contained XIncludes to the created objects. If this file is later _expand_ed, it will be semantically equivalent to the input file.
+IFCXML file containing XIncludes to the created objects. If this file is later _expand_ed, it will be semantically equivalent to the input file.
 
 See [hellowall](https://github.com/devonsparks/IfcObjAsm/tree/master/samples/hellowall/objects) as an example. 
 
@@ -121,9 +121,11 @@ Examining one of these object files ([an IFCWallType](https://github.com/devonsp
 1. All IFC entities descending from IFCRoot receive updated @id attributes matching their ifc:GlobalId. 
 All @refs to these entities are updated accordingly.
 2. @refs to IFC entities not descending from IFCRoot (Resource Layer Entities) are copied inline. This ensures every object only links to other, globally addressable objects. Because Resource Layer Entity instances are semantically equivalent, the only cost of copy-by-value is storage space. 
-3. The resulting objects are then written out to the object repository. All links are relative links into the object repository. These relative links are then bundled and returned to the use as an IFCXML file for further processing.
+3. The resulting objects are then written out to the object repository. All links are links into the object repository. These  links are then bundled and returned on stdout as an IFCXML file for further processing.
 
 ### _subgraph_
+_subgraph_ takes an IFCXML input file containing @refs to an objects repository. It then performs a recursive depth-first search to discover all object files connected those those listed in the input file. This allows complete extraction of subsets of IFC data without risking "dangling" references. This subset can then be edited and committed back to the repository using _objectify_.
+
 
 ### _expand_
 
