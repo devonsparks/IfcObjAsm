@@ -124,7 +124,7 @@ All @refs to these entities are updated accordingly.
 3. The resulting objects are then written out to the object repository. All links are links into the object repository. These  links are then bundled and returned on stdout as an IFCXML file for further processing.
 
 ### _subgraph_
-_subgraph_ takes an IFCXML input file containing @refs to an objects repository. It then performs a recursive depth-first search to discover all object files connected those those listed in the input file (including the input file itself). This allows complete extraction of subsets of IFC data without risking "dangling" references. This subset can then be edited and committed back to the repository using _objectify_.
+_subgraph_ takes an IFCXML input file containing @refs to an objects repository. It then performs a recursive depth-first search to discover all object files connected those listed in the input file (including the input file itself). This allows complete extraction of subsets of IFC data without risking "dangling" references. This subset can then be edited and committed back to the repository using _objectify_.
 
 For example, using an input file that contains one reference to an IfcWallType instance, we can discover all objects @ref'd to it.
 
