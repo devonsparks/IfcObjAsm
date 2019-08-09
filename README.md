@@ -1,19 +1,19 @@
 # IfcObjAsm
 
 ## Summary
-IfcObjAsm is an experimental command-line utility for transforming [IFCXML](https://en.wikipedia.org/wiki/Industry_Foundation_Classes#IFC/ifcXML_specifications) files into networks of linked objects. It does this exploding monolithic IFCXML documents into its constituent entities, with one entity per file. Each entity file is named by its IFC [GloballyUniqueId](http://docs.buildingsmartalliance.org/IFC4x2_Bridge/schema/ifcutilityresource/lexical/ifcgloballyuniqueid.htm) and placed in a common repository (named "objects") on the local file system. IFCObjAsm rewrites all references between IFC entities as references into this common repository. This approach has a few consequences:
+IfcObjAsm is an experimental command-line utility for transforming [IFCXML](https://en.wikipedia.org/wiki/Industry_Foundation_Classes#IFC/ifcXML_specifications) files into networks of small, hyperlinked documents. It does this exploding an IFCXML file into its constituent IFC entities, with one entity per file. Each entity file is named by its IFC [GloballyUniqueId](http://docs.buildingsmartalliance.org/IFC4x2_Bridge/schema/ifcutilityresource/lexical/ifcgloballyuniqueid.htm) and placed in a common folder repository (named "objects") on the local file system. IFCObjAsm then rewrites all references between IFC entities as references into this common repository. This approach has a few consequences:
 
-* Monolithic IFC(XML) files are transformed into networks of granular, hyperlinked objects.
+* Monolithic IFC(XML) files are transformed into networks of small, linked objects, represented as files.
 
-* Subsets of data can be extracted on demand by simply traversing the object graph (see the _subgraph_ command below). This affords a modular decomposition of IFC data and reduces demand on authoring environments. You only ever transact the subgraph of data you need. 
+* Subsets of data can be extracted on demand by traversing the object graph. This affords a modular decomposition of IFC data and reduces demand on authoring environments. You only ever transact the subgraph of data you need. 
 
-* Because IFC entities are stored as files, they can be managed directly by revision control systems like git. This offers new patterns of open, distributed collaboration based on IFC. 
+* Because IFC entities are stored as files, they can be managed directly by version control systems like git. This offers new patterns of open, distributed collaboration based on IFC. 
 
 * By using standard XML linking technologies, stakeholders can create  "views" into their object repositories organized by use case. [Xincludes](https://www.w3.org/TR/xinclude/), for example, can be used to [symlink](https://en.wikipedia.org/wiki/Symbolic_link) IFC objects into arbitrary containers, classification structures, or folders.  Because the XIncludes only ever reference object data, it's possible to build up as many "views" onto the object repository as needed. 
 
 * Composition of IFC data reduces to folder merging. Conflicts now occur at the level of individual IFC entities, not project files. 
 
-For a domain practitioner, IfcObjAsm acts like an swiss army knife for IFCXML data, able to separate and reconstitute IFC entities based on their relationships. For a software engineer, IfcObjAsm approximates a [linker](https://en.wikipedia.org/wiki/Linker_(computing) whose object files are IFC entities. For all, IfcObjAsm explores the possibility of better control and coordination of IFC-based assets by breaking them up into their constitutent parts and only generating 'complete' IFC files just-in-time.
+For a domain practitioner, IfcObjAsm acts like an swiss army knife for IFCXML data, able to separate and reconstitute IFC entities based on their relationships. For a software engineer, IfcObjAsm approximates a [linker](https://en.wikipedia.org/wiki/Linker_(computing) whose object files are IFC entities. For all, IfcObjAsm explores the possibility of better control and coordination of IFC-based assets by breaking them up into their constitutent parts, only generating 'complete' IFC files just-in-time.
 
 IfcObjAsm is a proof-of-concept only. It has not been heavily tested or even used. It is provided AS-IS with no warranty. Have fun!
 
