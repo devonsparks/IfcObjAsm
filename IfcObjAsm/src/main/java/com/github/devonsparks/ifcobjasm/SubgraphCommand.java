@@ -2,6 +2,7 @@ package com.github.devonsparks.ifcobjasm;
 
 import java.io.File;
 import java.io.InputStream;
+import java.net.URI;
 
 import javax.xml.transform.stream.StreamSource;
 
@@ -18,6 +19,7 @@ import net.sf.saxon.s9api.XsltTransformer;
 public class SubgraphCommand extends XsltCommand {
 
 	SubgraphCommand() {
+		super();
 		this.setName("subgraph");
 	}
 	
@@ -43,6 +45,7 @@ public class SubgraphCommand extends XsltCommand {
 	        XdmNode source = proc.newDocumentBuilder().build(new StreamSource(input));
 	        trans1 = templates1.load();
 	        trans1.setInitialContextNode(source);
+	        trans1.setBaseOutputURI(this.getBaseUri().toString());
 	        
         } catch(SaxonApiException e) {
         	return new CommandResponse(this,
@@ -52,7 +55,9 @@ public class SubgraphCommand extends XsltCommand {
 		
         
         try {
-	        trans1.setParameter(new QName("objectsdir"), new XdmAtomicValue("objects"));
+        	URI  objectsdir = this.getBaseUri().resolve("objects");
+	        trans1.setParameter(new QName("objectsdir"), 
+	        		new XdmAtomicValue(objectsdir.toString()));
 	        trans1.setDestination(resultTree);
 	        
 	        /* kickstart */

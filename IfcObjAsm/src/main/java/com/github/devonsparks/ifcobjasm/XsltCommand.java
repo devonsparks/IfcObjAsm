@@ -2,7 +2,6 @@ package com.github.devonsparks.ifcobjasm;
 
 import java.io.File;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 
 
@@ -14,12 +13,7 @@ public abstract class XsltCommand {
 
 	XsltCommand()
 	{
-		try {
-			baseUri = new URI(System.getProperty("user.dir"));
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		baseUri = new File(System.getProperty("user.dir")).toURI();
 	}
 	
 	
@@ -71,8 +65,7 @@ public abstract class XsltCommand {
 						String.format("Source xml %s document not found", args[1]));
 		}
 
-		if(args.length > 3 && args[2].equalsIgnoreCase("-b")) {
-			System.out.println("Trying to set basedir");
+		if(args.length > 3 && args[2].equals("-b")) {
 			File base = new File(args[3]);
 			if(!base.exists())
 				return new CommandResponse(this,
@@ -83,7 +76,6 @@ public abstract class XsltCommand {
 		
 		}
 		
-		System.out.println("Basedir now "+this.getBaseUri());
 		return new CommandResponse(this,
 					CommandResponse.states.OK,
 					"All args ok");

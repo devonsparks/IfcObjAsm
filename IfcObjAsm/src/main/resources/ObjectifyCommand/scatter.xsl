@@ -14,7 +14,7 @@
     <xsl:template match="*[@id]">
         <!-- output the persistent object to its own file -->
         
-        <xsl:result-document href="{concat('objects', '/', @id)}">
+        <xsl:result-document href="{concat('objects', '/', @id)}" indent="yes">
             <xsl:copy>
                 <xsl:copy-of select="@*"/>
                 <xsl:apply-templates/>

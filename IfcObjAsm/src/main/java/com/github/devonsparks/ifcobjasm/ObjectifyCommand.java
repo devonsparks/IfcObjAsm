@@ -28,7 +28,7 @@ public class ObjectifyCommand extends XsltCommand {
 	}
 	
 	/**
-	 * Given an ifcxml file (args[1]), rewrite refs to Resource Layer IFC
+	 * Given an ifcxml file, rewrite refs to Resource Layer IFC
 	 * Entities as inline literals, write each IfcRoot instance to its own file,
 	 * and return a list of xi:includes to all parsed IfcRoot instance objects.
 	 * See rewrite.xsl, scatter.xsl, report.xsl in resources folder for details.
@@ -36,14 +36,13 @@ public class ObjectifyCommand extends XsltCommand {
 	@Override
 	public CommandResponse execute(String[] args)  {
 		assert(args[0] == this.getName());
-		System.out.println("Before set, basedir is "+this.getBaseUri());
-		
+	
 		CommandResponse argcheck = this.parseargs(args);
 	
 		
 		if(argcheck.getState() != CommandResponse.states.OK)
 			return argcheck;
-		System.out.println("After set, basedir is "+this.getBaseUri());
+
 		InputStream rewrite = loader.getResourceAsStream("ObjectifyCommand/rewrite.xsl");
 		InputStream scatter = loader.getResourceAsStream("ObjectifyCommand/scatter.xsl");
 		InputStream report =  loader.getResourceAsStream("ObjectifyCommand/report.xsl");
@@ -52,7 +51,7 @@ public class ObjectifyCommand extends XsltCommand {
         XsltCompiler comp = proc.newXsltCompiler();
         XsltTransformer trans1, trans2, trans3;
         XdmDestination resultTree = new XdmDestination();
-        
+
         try {
         	/* rewrite step */
         	File input = new File(args[1]);
