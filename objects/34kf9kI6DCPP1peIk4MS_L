@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><IfcWall xmlns="http://www.iai-tech.org/ifcXML/IFC2x2/FINAL" xmlns:exp="urn:oid:1.0.10303.28.2.1.1" xmlns:doc="urn:oid:1.0.10303.28.2.1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ifc="http://www.iai-tech.org/ifcXML/IFC2x2/FINAL" id="34kf9kI6DCPP1peIk4MS_L">
+			<GlobalId>34kf9kI6DCPP1peIk4MS_L</GlobalId>
+			<OwnerHistory>
+				<IfcOwnerHistory>
+			<OwningUser>
+				<IfcPersonAndOrganization>
+			<ThePerson>
+				<IfcPerson>
+			<FamilyName/>
+			<GivenName>DSparks</GivenName>
+		</IfcPerson>
+			</ThePerson>
+			<TheOrganization>
+				<IfcOrganization>
+			<Name/>
+			<Description/>
+		</IfcOrganization>
+			</TheOrganization>
+		</IfcPersonAndOrganization>
+			</OwningUser>
+			<OwningApplication>
+				<IfcApplication>
+			<ApplicationDeveloper>
+				<IfcOrganization>
+			<Name>Autodesk Revit 2019 (ENU)</Name>
+		</IfcOrganization>
+			</ApplicationDeveloper>
+			<Version>2019</Version>
+			<ApplicationFullName>Autodesk Revit 2019 (ENU)</ApplicationFullName>
+			<ApplicationIdentifier>Revit</ApplicationIdentifier>
+		</IfcApplication>
+			</OwningApplication>
+			<ChangeAction>nochange</ChangeAction>
+			<CreationDate>0</CreationDate>
+		</IfcOwnerHistory>
+			</OwnerHistory>
+			<Name>A Standard rectangular wall:A Standard rectangular wall:279519</Name>
+			<ObjectType>A Standard rectangular wall:A Standard rectangular wall</ObjectType>
+			<ObjectPlacement>
+				<IfcLocalPlacement>
+			<PlacementRelTo>
+				<IfcLocalPlacement>
+			<PlacementRelTo>
+				<IfcLocalPlacement>
+			<RelativePlacement>
+				<IfcAxis2Placement3D>
+					<Location>
+						<IfcCartesianPoint>
+			<Coordinates exp:cType="list">
+				<IfcLengthMeasure exp:pos="0">0.</IfcLengthMeasure>
+				<IfcLengthMeasure exp:pos="1">0.</IfcLengthMeasure>
+				<IfcLengthMeasure exp:pos="2">0.</IfcLengthMeasure>
+			</Coordinates>
+		</IfcCartesianPoint>
+					</Location>
+				</IfcAxis2Placement3D>
+			</RelativePlacement>
+		</IfcLocalPlacement>
+			</PlacementRelTo>
+			<RelativePlacement>
+				<IfcAxis2Placement3D>
+			<Location>
+				<IfcCartesianPoint>
+			<Coordinates exp:cType="list">
+				<IfcLengthMeasure exp:pos="0">0.</IfcLengthMeasure>
+				<IfcLengthMeasure exp:pos="1">0.</IfcLengthMeasure>
+				<IfcLengthMeasure exp:pos="2">0.</IfcLengthMeasure>
+			</Coordinates>
+		</IfcCartesianPoint>
+			</Location>
+		</IfcAxis2Placement3D>
+			</RelativePlacement>
+		</IfcLocalPlacement>
+			</PlacementRelTo>
+			<RelativePlacement>
+				<IfcAxis2Placement3D>
+			<Location>
+				<IfcCartesianPoint>
+					<Coordinates exp:cType="list">
+						<IfcLengthMeasure exp:pos="0">-2400.</IfcLengthMeasure>
+						<IfcLengthMeasure exp:pos="1">-150.</IfcLengthMeasure>
+						<IfcLengthMeasure exp:pos="2">0.</IfcLengthMeasure>
+					</Coordinates>
+				</IfcCartesianPoint>
+			</Location>
+		</IfcAxis2Placement3D>
+			</RelativePlacement>
+		</IfcLocalPlacement>
+			</ObjectPlacement>
+			<Representation>
+				<IfcProductDefinitionShape>
+			<Representations exp:cType="list">
+				<IfcShapeRepresentation>
+			<ContextOfItems>
+				<IfcGeometricRepresentationSubContext>
+			<ContextIdentifier>Body</ContextIdentifier>
+			<ContextType>Model</ContextType>
+			<ParentContext>
+				<IfcGeometricRepresentationContext>
+			<ContextType>Model</ContextType>
+			<CoordinateSpaceDimension>3</CoordinateSpaceDimension>
+			<Precision>0.01</Precision>
+			<WorldCoordinateSystem>
+				<IfcAxis2Placement3D>
+			<Location>
+				<IfcCartesianPoint>
+			<Coordinates exp:cType="list">
+				<IfcLengthMeasure exp:pos="0">0.</IfcLengthMeasure>
+				<IfcLengthMeasure exp:pos="1">0.</IfcLengthMeasure>
+				<IfcLengthMeasure exp:pos="2">0.</IfcLengthMeasure>
+			</Coordinates>
+		</IfcCartesianPoint>
+			</Location>
+		</IfcAxis2Placement3D>
+			</WorldCoordinateSystem>
+			<TrueNorth>
+				<IfcDirection>
+			<DirectionRatios exp:cType="list">
+				<IfcReal exp:pos="0">6.123031769E-17</IfcReal>
+				<IfcReal exp:pos="1">1.</IfcReal>
+			</DirectionRatios>
+		</IfcDirection>
+			</TrueNorth>
+		</IfcGeometricRepresentationContext>
+			</ParentContext>
+			<TargetView>model_view</TargetView>
+		</IfcGeometricRepresentationSubContext>
+			</ContextOfItems>
+			<RepresentationIdentifier>Body</RepresentationIdentifier>
+			<RepresentationType>SweptSolid</RepresentationType>
+			<Items exp:cType="set">
+				<IfcExtrudedAreaSolid>
+			<SweptArea>
+				<IfcRectangleProfileDef>
+			<ProfileType>area</ProfileType>
+			<ProfileName>A Standard rectangular wall</ProfileName>
+			<Position>
+				<IfcAxis2Placement2D>
+			<Location>
+				<IfcCartesianPoint>
+			<Coordinates exp:cType="list">
+				<IfcLengthMeasure exp:pos="0">0.</IfcLengthMeasure>
+				<IfcLengthMeasure exp:pos="1">0.</IfcLengthMeasure>
+			</Coordinates>
+		</IfcCartesianPoint>
+			</Location>
+			<RefDirection>
+				<IfcDirection>
+			<DirectionRatios exp:cType="list">
+				<IfcReal exp:pos="0">1.</IfcReal>
+				<IfcReal exp:pos="1">0.</IfcReal>
+			</DirectionRatios>
+		</IfcDirection>
+			</RefDirection>
+		</IfcAxis2Placement2D>
+			</Position>
+			<XDim>4000.</XDim>
+			<YDim>300.</YDim>
+		</IfcRectangleProfileDef>
+			</SweptArea>
+			<Position>
+				<IfcAxis2Placement3D>
+			<Location>
+				<IfcCartesianPoint>
+			<Coordinates exp:cType="list">
+				<IfcLengthMeasure exp:pos="0">2000.</IfcLengthMeasure>
+				<IfcLengthMeasure exp:pos="1">150.</IfcLengthMeasure>
+				<IfcLengthMeasure exp:pos="2">0.</IfcLengthMeasure>
+			</Coordinates>
+		</IfcCartesianPoint>
+			</Location>
+			<Axis>
+				<IfcDirection>
+			<DirectionRatios exp:cType="list">
+				<IfcReal exp:pos="0">0.</IfcReal>
+				<IfcReal exp:pos="1">0.</IfcReal>
+				<IfcReal exp:pos="2">1.</IfcReal>
+			</DirectionRatios>
+		</IfcDirection>
+			</Axis>
+			<RefDirection>
+				<IfcDirection>
+			<DirectionRatios exp:cType="list">
+				<IfcReal exp:pos="0">-1.</IfcReal>
+				<IfcReal exp:pos="1">0.</IfcReal>
+				<IfcReal exp:pos="2">0.</IfcReal>
+			</DirectionRatios>
+		</IfcDirection>
+			</RefDirection>
+		</IfcAxis2Placement3D>
+			</Position>
+			<ExtrudedDirection>
+				<IfcDirection>
+			<DirectionRatios exp:cType="list">
+				<IfcReal exp:pos="0">0.</IfcReal>
+				<IfcReal exp:pos="1">0.</IfcReal>
+				<IfcReal exp:pos="2">1.</IfcReal>
+			</DirectionRatios>
+		</IfcDirection>
+			</ExtrudedDirection>
+			<Depth>2400.</Depth>
+		</IfcExtrudedAreaSolid>
+			</Items>
+		</IfcShapeRepresentation>
+			</Representations>
+		</IfcProductDefinitionShape>
+			</Representation>
+			<Tag>279519</Tag>
+			<PredefinedType>notdefined</PredefinedType>
+		</IfcWall>
