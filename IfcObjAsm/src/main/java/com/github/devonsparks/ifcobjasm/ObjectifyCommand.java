@@ -35,7 +35,7 @@ public class ObjectifyCommand extends XsltCommand {
 		XdmDestination resultTree = new XdmDestination();
 		
 		try {
-			rewrite = builder.build(this.getXSL("ObjectifyCommand/rewrite.xsl"), new File(args[1]));
+		rewrite = builder.build(this.getXSL("ObjectifyCommand/rewrite.xsl"), new File(args[1]));
 			scatter = builder.build(this.getXSL("ObjectifyCommand/scatter.xsl"));
 			report  = builder.build(this.getXSL("ObjectifyCommand/report.xsl"));
 
@@ -46,7 +46,6 @@ public class ObjectifyCommand extends XsltCommand {
 
 		try {
 			URI objectsdir = this.getBaseUri().resolve("objects");
-			
 			rewrite.setDestination(scatter);
 			scatter.setDestination(report);
 			report.setParameter(new QName("objectsdir"), new XdmAtomicValue(objectsdir.toString()));
