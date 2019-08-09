@@ -26,7 +26,7 @@ $ java -jar IfcObjAsm-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 Command required. Options: expand | subgraph | objectify
 ```
 
-Short description of each commands can be triggered with a `-h` flag:
+Short descriptions of each commands can be triggered with a `-h` flag:
 ```
 $ java -jar IfcObjAsm-0.0.1-SNAPSHOT-jar-with-dependencies.jar <command-name> [-h]
 ```
@@ -45,7 +45,7 @@ If you need to build IfcObjAsm yourself: `mvn clean package`.
 ### _objectify_
 _objectify_ takes an IFCXML and transforms it into an object repository. The resulting repository contains one file
 for each IFCRoot-descended entity in the input file, named by its ifc:GlobalId. _objectify_  will emit on stdout an
-IFCXML file containing XIncludes to the created objects. If this file is later _expand_ed, it will be semantically equivalent to the input file.
+IFCXML file containing XIncludes to the created objects. If this file is later passed to _expand_, it will be semantically equivalent to the input file.
 
 See [hellowall](https://github.com/devonsparks/IfcObjAsm/tree/master/samples/hellowall/objects) as an example. 
 
