@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><IfcRelAggregates xmlns="http://www.iai-tech.org/ifcXML/IFC2x2/FINAL" xmlns:exp="urn:oid:1.0.10303.28.2.1.1" xmlns:doc="urn:oid:1.0.10303.28.2.1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ifc="http://www.iai-tech.org/ifcXML/IFC2x2/FINAL" id="2fb9oBlXfFexGU1p8oU$2Y">
+			<GlobalId>2fb9oBlXfFexGU1p8oU$2Y</GlobalId>
+			<OwnerHistory>
+				<IfcOwnerHistory>
+			<OwningUser>
+				<IfcPersonAndOrganization>
+			<ThePerson>
+				<IfcPerson>
+			<FamilyName/>
+			<GivenName>DSparks</GivenName>
+		</IfcPerson>
+			</ThePerson>
+			<TheOrganization>
+				<IfcOrganization>
+			<Name/>
+			<Description/>
+		</IfcOrganization>
+			</TheOrganization>
+		</IfcPersonAndOrganization>
+			</OwningUser>
+			<OwningApplication>
+				<IfcApplication>
+			<ApplicationDeveloper>
+				<IfcOrganization>
+			<Name>Autodesk Revit 2019 (ENU)</Name>
+		</IfcOrganization>
+			</ApplicationDeveloper>
+			<Version>2019</Version>
+			<ApplicationFullName>Autodesk Revit 2019 (ENU)</ApplicationFullName>
+			<ApplicationIdentifier>Revit</ApplicationIdentifier>
+		</IfcApplication>
+			</OwningApplication>
+			<ChangeAction>nochange</ChangeAction>
+			<CreationDate>0</CreationDate>
+		</IfcOwnerHistory>
+			</OwnerHistory>
+			<RelatingObject>
+				<IfcSite xsi:nil="true" ref="0agga2sOr8cPHF3Gx7c285"/>
+			</RelatingObject>
+			<RelatedObjects exp:cType="set">
+				<IfcBuilding xsi:nil="true" ref="2xd9Hy$kzEXOevAafeX$79"/>
+			</RelatedObjects>
+		</IfcRelAggregates>

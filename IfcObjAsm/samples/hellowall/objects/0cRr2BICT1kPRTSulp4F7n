@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><IfcWallType xmlns="http://www.iai-tech.org/ifcXML/IFC2x2/FINAL" xmlns:exp="urn:oid:1.0.10303.28.2.1.1" xmlns:doc="urn:oid:1.0.10303.28.2.1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ifc="http://www.iai-tech.org/ifcXML/IFC2x2/FINAL" id="0cRr2BICT1kPRTSulp4F7n">
+			<GlobalId>0cRr2BICT1kPRTSulp4F7n</GlobalId>
+			<OwnerHistory>
+				<IfcOwnerHistory>
+			<OwningUser>
+				<IfcPersonAndOrganization>
+			<ThePerson>
+				<IfcPerson>
+			<FamilyName/>
+			<GivenName>DSparks</GivenName>
+		</IfcPerson>
+			</ThePerson>
+			<TheOrganization>
+				<IfcOrganization>
+			<Name/>
+			<Description/>
+		</IfcOrganization>
+			</TheOrganization>
+		</IfcPersonAndOrganization>
+			</OwningUser>
+			<OwningApplication>
+				<IfcApplication>
+			<ApplicationDeveloper>
+				<IfcOrganization>
+			<Name>Autodesk Revit 2019 (ENU)</Name>
+		</IfcOrganization>
+			</ApplicationDeveloper>
+			<Version>2019</Version>
+			<ApplicationFullName>Autodesk Revit 2019 (ENU)</ApplicationFullName>
+			<ApplicationIdentifier>Revit</ApplicationIdentifier>
+		</IfcApplication>
+			</OwningApplication>
+			<ChangeAction>nochange</ChangeAction>
+			<CreationDate>0</CreationDate>
+		</IfcOwnerHistory>
+			</OwnerHistory>
+			<Name>A Standard rectangular wall</Name>
+			<HasPropertySets exp:cType="set">
+				<IfcPropertySet ref="3ewKlnEfbD$OIToybZDVSW"/>
+				<IfcPropertySet ref="27974KITb6q9mSCftpWcB8"/>
+				<IfcPropertySet ref="0cRr2BICT1kPRTU7Rp4F7n"/>
+			</HasPropertySets>
+			<Tag>279517</Tag>
+			<PredefinedType>notdefined</PredefinedType>
+		</IfcWallType>

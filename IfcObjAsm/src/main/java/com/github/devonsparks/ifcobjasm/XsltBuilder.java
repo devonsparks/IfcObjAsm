@@ -27,8 +27,6 @@ public class XsltBuilder {
 		baseUri = baseOutputUri;
 		proc = new Processor(false);
 		comp = proc.newXsltCompiler();
-		
-
 	}
 
 	public XsltTransformer build(InputStream stylesheet, File input) throws SaxonApiException {
