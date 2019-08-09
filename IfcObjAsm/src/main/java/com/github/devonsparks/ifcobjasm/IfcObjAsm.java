@@ -33,14 +33,17 @@ public class IfcObjAsm {
 
 	}
 	
-
+	/**
+	 * 
+	 * @param args  The full argument list passed to main()
+	 * @return      The Commannd's string response or an error message
+	 */
 	public static CommandResponse dispatch(String[] args) {
 		return commands.get(args[0]).execute(args);
 	}
 
 	public static void err(String msg) {
 		System.err.println(msg);
-;
 		System.exit(-1);
 	}
 

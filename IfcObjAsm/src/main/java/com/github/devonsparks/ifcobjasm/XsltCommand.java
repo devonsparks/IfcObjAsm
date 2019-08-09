@@ -20,7 +20,10 @@ public abstract class XsltCommand {
 	public String getName() {
 		return name;
 	}
-	
+	/**
+	 * The Command's name as used on the command line
+	 * @param name
+	 */
 	protected void setName(final String name) {
 		this.name = name;
 	}
@@ -28,13 +31,16 @@ public abstract class XsltCommand {
 	public URI getBaseUri() {
 		return this.baseUri;
 	}
-	
+	/**
+	 * The base output directory for all XSLT processing
+	 */
 	public void setBaseUri(URI baseUri) {
 		this.baseUri = baseUri;
 	}
 	
 	/**
-	 * All commands receive the full argument for further processing
+	 * Execute the transformations associated with this command.
+	 * All commands receive the full argument list for processing.
 	 * 
 	 * @param args  the full arglist. args[0] is the command name.
 	 * @return
