@@ -158,7 +158,7 @@ $ java -jar target/IfcObjAsm-0.0.1-SNAPSHOT-jar-with-dependencies.jar subgraph s
 </doc:iso_10303_28>
 ```
 
-From here, the result could be _expand_ed and fed to an authoring application. We imagine subgraph refs could serve as the
+From here, the result could be _expand_ -ed and fed to an authoring application. We imagine subgraph refs could serve as the
 basic for a work packaging system, where a single file records all IFC entities required for a particular scope of work.
 
 
