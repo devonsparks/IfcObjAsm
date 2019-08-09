@@ -12,7 +12,8 @@ public class CommandResponse {
 	 * @param resp     Response  String content. On FAIL, this is an error message. On OK, XSLT default output.
 	 */
 	CommandResponse(XsltCommand command, CommandResponse.states state, String resp) {
-		this.resp = String.format("%s: %s", command.getName(), resp);		
+		this.resp = state == states.OK ? resp :
+					String.format("%s: %s", command.getName(), resp);		
 		this.state = state;
 	}
 	

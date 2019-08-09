@@ -1,6 +1,7 @@
 package com.github.devonsparks.ifcobjasm;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
 
@@ -9,11 +10,12 @@ public abstract class XsltCommand {
 	
 	private URI baseUri;
 	final ClassLoader loader = IfcObjAsm.class.getClassLoader();
-	private String name = "XsltCommand";
+	private String name;
 
-	XsltCommand()
+	XsltCommand(String name)
 	{
-		baseUri = new File(System.getProperty("user.dir")).toURI();
+		this.name = name;
+		this.baseUri = new File(System.getProperty("user.dir")).toURI();
 	}
 	
 	
@@ -36,6 +38,10 @@ public abstract class XsltCommand {
 	 */
 	public void setBaseUri(URI baseUri) {
 		this.baseUri = baseUri;
+	}
+	
+	public InputStream getXSL(String path) {
+		return loader.getResourceAsStream(path);
 	}
 	
 	/**
