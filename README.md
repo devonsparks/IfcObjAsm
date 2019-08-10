@@ -184,7 +184,7 @@ There are a lot of directions to go from here. Some ideas:
 
 More critical is working out the kinks, like:
 * Writing a proper test suite
-* Validating output (and input?) against the XSD spces
+* Validating output (and input?) against the XSD specs
 * Determining whether [canonical XML](https://en.wikipedia.org/wiki/Canonical_XML) is enough to prevent git from having a seizure every time we run _objectify_. If so, can we achieve this without Saxon-EE?
 * Improving documentation and making demos
 
